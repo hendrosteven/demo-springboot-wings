@@ -1,9 +1,14 @@
 package com.wings.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.wings.entity.Department;
 
-public interface DepartmentRepo extends CrudRepository<Department, Long> {
+public interface DepartmentRepo extends PagingAndSortingRepository<Department, Long> {
     
+    public Department findByName(String name);
+
+    public List<Department> findByNameContaining(String string);
 }
