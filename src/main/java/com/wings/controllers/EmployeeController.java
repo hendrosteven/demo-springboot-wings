@@ -17,6 +17,7 @@ import com.wings.entity.Employee;
 import com.wings.services.EmployeeService;
 import com.wings.wrapper.EmployeeRequest;
 import com.wings.wrapper.EmployeeRequest;
+import com.wings.wrapper.ResponseData;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -32,12 +33,13 @@ public class EmployeeController {
 
         if(errors.hasErrors()){
             for(ObjectError error : errors.getAllErrors()){
-                response.getMessage().add(error.getDefaultMessage());
+                response.getMessages().add(error.getDefaultMessage());
             }
             response.setStatus(false);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
-        return service.createEmployee(employeeRequest);
+        response.setPayload(service.createEmployee(employeeRequest));
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping

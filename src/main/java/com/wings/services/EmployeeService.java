@@ -25,12 +25,13 @@ public class EmployeeService {
     
     public Employee createEmployee(EmployeeRequest employeeRequest){
         if(repo.existsByEmailOrPhone(employeeRequest.getEmail(), employeeRequest.getPhone())){
-            return new RuntimeException("Email or Phone already exist");
+            throw new RuntimeException("Email or Phone already exist");
         }
         Employee employee = new Employee();
         employee.setName(employeeRequest.getName());
         employee.setEmail(employeeRequest.getEmail());
-        employee.setDepartment(departmentRepo.findById(employeeRequest.getDepartmentId()));
+        employee.setPhone(employeeRequest.getPhone());
+        employee.setDepartment(departmentRepo.findById(employeeRequest.getDepartmentId()).orElse(null));
         return repo.save(employee);
     }
 
