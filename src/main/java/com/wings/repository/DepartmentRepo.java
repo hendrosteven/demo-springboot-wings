@@ -11,4 +11,7 @@ public interface DepartmentRepo extends PagingAndSortingRepository<Department, L
     public Department findByName(String name);
 
     public List<Department> findByNameContaining(String string);
+
+    // @Query("SELECT d FROM Department D WHERE d.name = :param")
+    // public Department cariBerdasarkanNama(String nama);
 }
