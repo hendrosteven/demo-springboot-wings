@@ -6,6 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.wings.entity.Department;
 
+
 public interface DepartmentRepo extends PagingAndSortingRepository<Department, Long> {
     
     public Department findByName(String name);
